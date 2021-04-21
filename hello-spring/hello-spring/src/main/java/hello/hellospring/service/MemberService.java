@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
-
+    //Ctrl+Shift+T
     private final MemberRepository memberRepository = new MemoryMemberRepository();
 
     /* 회원가입 */
@@ -42,5 +42,4 @@ public class MemberService {
     public Optional<Members> findOne(Long memberId){
         return memberRepository.findById(memberId);
     }
-
 }
