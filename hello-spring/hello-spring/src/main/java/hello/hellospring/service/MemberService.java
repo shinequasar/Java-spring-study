@@ -9,7 +9,12 @@ import java.util.Optional;
 
 public class MemberService {
     //Ctrl+Shift+T
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    //DI 구조( MemberServiceTest 클래스랑 연관됨.)
+    public MemberService(MemberRepository memberRepository){
+        this.memberRepository = memberRepository;
+    }
 
     /* 회원가입 */
 
@@ -28,6 +33,8 @@ public class MemberService {
 
     private void validateDuplicateMember(Members member) {
         memberRepository.findByName(member.getName())
+                //Optional.ifPresent()는 Optional 객체 안에 값이 있는 경우 실행할 람다를 인자로 받습니다.
+                // 값이 있는 경우에 실행되고 값이 없는 경우에는 실행되지 않는 로직에 ifPresent를 활용할 수 있습니다.
             .ifPresent(m->{
                 throw new IllegalStateException("이미 존재하는 회원입니다.");
         });
